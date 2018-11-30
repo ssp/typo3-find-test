@@ -88,9 +88,9 @@
 				<f:debug inline="1" title="Variable string1">{string1}</f:debug>
 				<f:debug inline="1" title="Variable string2">{string2}</f:debug>
 				<f:debug inline="1" title="Variable existingArray">{existingArray}</f:debug>
-				<f:debug inline="1" title="Add two entries to the existingArray, one of which replaces the original value: {t:format.join(array:'{0:\'<s:data.newArray array=\"{existing\', 1:\'Array}\" keys=\"{0:string1,\', 2:\' 1:string2}\" values=\"{0:8,\', 3:\' 1:9}\"/>\'}', separator:'')}"><t:data.newArray array="{existingArray}" keys="{0:string1, 1:string2}" values="{0:8, 1:9}"/></f:debug>
+				<f:debug inline="1" title="Add two entries to the existingArray, one of which replaces the original value: {t:format.join(array:'{0:\'<s:data.\', 1:\'newArray array=\"{existing\', 2:\'Array}\" keys=\"{0:string1,\', 2:\' 1:string2}\" values=\"{0:8, 1:9}\"/>\'}', separator:'')}"><t:data.newArray array="{existingArray}" keys="{0:string1, 1:string2}" values="{0:8, 1:9}"/></f:debug>
 				<t:data.newArray name="newArray" array="{existingArray}" keys="{0:string1, 1:string2}" values="{0:8, 1:9}">
-				<f:debug inline="1" title="The same as in the previous example, but assing the resulting value to a template variable and use that inside the tag: {t:format.join(array:'{0:\'<s:data.newArray name=\"newArray\" array=\"{existing\', 1:\'Array}\" keys=\"{0:string1,\', 2:\' 1:string2}\" values=\"{0:8,\', 3:\' 1:9}\">{new\', 4:\'Array}</s:data.newArray>\'}', separator:'')}">{newArray}</f:debug>
+					<f:debug inline="1" title="The same as in the previous example, but assign the resulting value to a template variable and use that inside the tag: {t:format.join(array:'{0:\'<s:data.\', 1:\'newArray name=\"newArray\" array=\"{existing\', 2:\'Array}\" keys=\"{0:string1, 1:string2}\" values=\"{0:8,\', 3:\' 1:9}\">{new\', 4:\'Array}</s:data\', 5:\'.newArray>\'}', separator:'')}">{newArray}</f:debug>
 				</t:data.newArray>
 			</f:alias>
 		</p>
@@ -101,7 +101,6 @@
 		</p>
 
 
-
 		<h3 id="data.split">data.split</h3>
 		<p>
 			Splits the given string at a separator and returns the resulting array.
@@ -110,19 +109,18 @@
 		<dl>
 			<dt class="required">string (or child)</dt>
 			<dd>The string to split.</dd>
-			<dt>separator [', ']</dt>
+			<dt class="required">separator</dt>
 			<dd>The separator to split at.</dd>
 		</dl>
 		<h4>Examples</h4>
 		<p>
 			<f:alias map="{testString:'1, 2, 3'}">
-				<f:debug inline="1" title="Variable testArray">{testString}</f:debug>
-				<f:debug inline="1" title="Tag use with default separator: {t:format.join(array:'{0:\'<s:data.split string=\"{test\', 1:\'String}\"\'}', separator:'')}/>"><t:data.split string="{testString}"/></f:debug>
-				<f:debug inline="1" title="Tag use with string as child: {t:format.join(array:'{0:\'<s:data.split>{test\', 1:\'String}</s:data.split>\'}', separator:'')}"><t:data.split>{testString}</t:data.split></f:debug>
-				<f:debug inline="1" title="Inline use with space as the separator: {t:format.join(array:'{0:\'{s:data.split(string:\', 1:\'testString, separator:\" \")}\'}', separator:'')}">{t:data.split(string:testString, separator:' ')}</f:debug>
+				<f:debug inline="1" title="Variable testString">{testString}</f:debug>
+
+				<f:debug inline="1" title="Tag use with string as child: {t:format.join(array:'{0:\'<s:data.split separator=\", \">{test\', 1:\'String}</s:data.split>\'}', separator:'')}"><t:data.split separator=", ">{testString}</t:data.split></f:debug>
+				<f:debug inline="1" title="Inline use: {t:format.join(array:'{0:\'{s:data.split(string:\', 1:\'testString, separator:\", \")}\'}', separator:' ')}">{t:data.split(string:testString, separator:', ')}</f:debug>
 			</f:alias>
 		</p>
-
 
 		<h3 id="data.transpose">data.transpose</h3>
 		<p>
@@ -149,7 +147,7 @@
 				<f:debug inline="1" title="Variable fruits">{fruits}</f:debug>
 				<f:debug inline="1" title="Variable bakedGoods">{bakedGoods}</f:debug>
 				<t:data.transpose arrays="{fruit:fruits, bakedGood:bakedGoods}" name="sweets">
-					<f:debug inline="1" title="The resulting array available in the variable sweets inside the View Helper: {t:format.join(array:'{0:\'<s:data.transpose arrays=\"{fruit:fruits, \', 1:\'bakedGood:bakedGoods}\" name=\"sweets\">{swe\', 2:\'ets}</s:data.transpose>\'}', separator:'')}">{sweets}</f:debug>
+					<f:debug inline="1" title="The resulting array available in the variable sweets inside the View Helper: {t:format.join(array:'{0:\'<s:data.\', 1:\'transpose arrays=\"{fruit:fruits, \', 2:\'bakedGood:bakedGoods}\" name=\"sweets\">{swe\', 3:\'ets}</s:data\', 4:\'.transpose>\'}', separator:'')}">{sweets}</f:debug>
 				</t:data.transpose>
 			</f:alias>
 		</p>
@@ -173,8 +171,8 @@
 				<f:debug inline="1" title="Variable testArray">{testArray}</f:debug>
 				<f:debug inline="1" title="Variable testKey">{testKey}</f:debug>
 
-				<f:debug inline="1" title="Tag use: {t:format.join(array:'{0:\'<s:data.valueForKey array=\"{test\', 1:\'Array}\" key=\"{test\', 2:\'Key}\"/>\'}', separator:'')}"><t:data.valueForKey array="{testArray}" key="{testKey}"/></f:debug>
-				<f:debug inline="1" title="Inline use: {t:format.join(array:'{0:\'{s:data.valueForKey(array:\', 1:\'testArray, key:testKey)}\'}', separator:'')}">{t:data.valueForKey(array:testArray, key:testKey)}</f:debug>
+				<f:debug inline="1" title="Tag use: {t:format.join(array:'{0:\'<s:data.\', 1:\'valueForKey array=\"{test\', 2:\'Array}\" key=\"{test\', 3:\'Key}\"/>\'}', separator:'')}"><t:data.valueForKey array="{testArray}" key="{testKey}"/></f:debug>
+				<f:debug inline="1" title="Inline use: {t:format.join(array:'{0:\'{s:data.\', 1:\'valueForKey(array:\', 2:\'testArray, key:testKey)}\'}', separator:'')}">{t:data.valueForKey(array:testArray, key:testKey)}</f:debug>
 			</f:alias>
 		</p>
 	</section>
@@ -218,7 +216,7 @@
 		<p>
 			<f:alias map="{testArray:'{0:\'one\', 1:\'two,two\', 2:\'three\"|three\'}'}">
 				<f:debug inline="1" title="Variable testArray">{testArray}</f:debug>
-				<f:debug inline="1" title="Tag use: {t:format.join(array:'{0:\'<s:format.CSVLine data=\"{test\', 1:\'Array}\"/>\'}', separator:'')}"><t:format.CSVLine data="{testArray}"/></f:debug>
+				<f:debug inline="1" title="Tag use: {t:format.join(array:'{0:\'<s:format.\', 1:\'CSVLine data=\"{test\', 2:\'Array}\"/>\'}', separator:'')}"><t:format.CSVLine data="{testArray}"/></f:debug>
 				<f:debug inline="1" title="Tag use with data as child: {t:format.join(array:'{0:\'<s:format.CSVLine>{test\', 1:\'Array}</s:format.CSVLine>\'}', separator:'')}"><t:format.CSVLine>{testArray}</t:format.CSVLine></f:debug>
 				<f:debug inline="1" title="Inline use with custom field delimiters and enclosures: {t:format.join(array:'{0:\'{s:format.CSVLine(data:\', 1:\'testArray, fieldDelimiter:\"|\", fieldEnclosure:\"*\")}\'}', separator:'')}">{t:format.CSVLine(data:testArray, fieldDelimiter:"|", fieldEnclosure:"*")}</f:debug>
 			</f:alias>
@@ -241,9 +239,9 @@
 		<p>
 			<f:alias map="{testArray:'{0:\'one\', 1:\'two\', 2:\'three\'}'}">
 				<f:debug inline="1" title="Variable testArray">{testArray}</f:debug>
-				<f:debug inline="1" title="Tag use: {t:format.join(array:'{0:\'<s:format.join array=\"{test\', 1:\'Array}\"/>\'}', separator:'')}"><t:format.join array="{testArray}"/></f:debug>
-				<f:debug inline="1" title="Tag use with array as child: {t:format.join(array:'{0:\'<s:format.join>{test\', 1:\'Array}</s:format.join/>\'}', separator:'')}"><t:format.join>{testArray}</t:format.join></f:debug>
-				<f:debug inline="1" title="Inline use with custom separator: {t:format.join(array:'{0:\'{s:format.join(array:test\', 1:\'Array, separator:\"*\")}\'}', separator:'')}">{t:format.join(array:testArray, separator:"*")}</f:debug>
+				<f:debug inline="1" title="Tag use: {t:format.join(array:'{0:\'<s:format.\', 1:\'join array=\"{test\', 2:\'Array}\"/>\'}', separator:'')}"><t:format.join array="{testArray}"/></f:debug>
+				<f:debug inline="1" title="Tag use with array as child: {t:format.join(array:'{0:\'<s:format.\', 1:\'join>{test\', 2:\'Array}</s:format.join/>\'}', separator:'')}"><t:format.join>{testArray}</t:format.join></f:debug>
+				<f:debug inline="1" title="Inline use with custom separator: {t:format.join(array:'{0:\'{s:format.\', 1:\'join(array:test\', 2:\'Array, separator:\"*\")}\'}', separator:'')}">{t:format.join(array:testArray, separator:"*")}</f:debug>
 			</f:alias>
 		</p>
 
@@ -263,7 +261,7 @@
 			<f:alias map="{testArray:'{0:\'one\', 1:2, 2:\'{a:\"A\", b:\"B\", c:\"C\"}\'}'}">
 				<f:debug inline="1" title="Variable testArray">{testArray}</f:debug>
 				<f:debug inline="1" title="Tag use: {t:format.join(array:'{0:\'<s:format.JSON data=\"{test\', 1:\'Array}\"/>\'}', separator:'')}"><t:format.JSON data="{testArray}"/></f:debug>
-				<f:debug inline="1" title="Tag use with data as child: {t:format.join(array:'{0:\'<s:format.JSON>{test\', 1:\'Array}</s:format.JSON/>\'}', separator:'')}"><t:format.JSON>{testArray}</t:format.JSON></f:debug>
+				<f:debug inline="1" title="Tag use with data as child: {t:format.join(array:'{0:\'<s:format\', 1:\'.JSON>{test\', 2:\'Array}</s:format.JSON/>\'}', separator:'')}"><t:format.JSON>{testArray}</t:format.JSON></f:debug>
 				<f:debug inline="1" title="Inline use: {t:format.join(array:'{0:\'{s:format.JSON(data:test\', 1:\'Array)}\'}', separator:'')}">{t:format.JSON(data:testArray)}</f:debug>
 			</f:alias>
 		</p>
@@ -287,9 +285,9 @@
 		</dl>
 		<h4>Examples</h4>
 		<p>
-			<f:debug inline="1" title="Tag use: {t:format.join(array:'{0:\'<t:format.regexp string=\"foo-bar\"\', 1:\' match=\"/foo/\" replace=\"bar\"/>\'}', separator:'')}"><t:format.regexp string="foo-bar" match="/foo/" replace="bar"/></f:debug>
-			<f:debug inline="1" title="Tag use using the string from child: {t:format.join(array:'{0:\'<s:format.regexp \', 1:\' match=\"/foo/\" replace=\"bar\">foo-bar</s:format.regexp>\'}', separator:'')}"><t:format.regexp match="/foo/" replace="bar">foo-bar</t:format.regexp></f:debug>
-			<f:debug inline="1" title="Inline use checking for a match: {t:format.join(array:'{0:\'{s:format.regexp(string:\"foo-bar\"\', 1:\', match:\"/foo/\")}\'}', separator:'')}">{t:format.regexp(string:"foo-bar", match:"/foo/")}</f:debug>
+			<f:debug inline="1" title="Tag use: {t:format.join(array:'{0:\'<s:format.\', 1:\'regexp string=\"foo-bar\"\', 2:\' match=\"/foo/\" replace=\"bar\"/>\'}', separator:'')}"><t:format.regexp string="foo-bar" match="/foo/" replace="bar"/></f:debug>
+			<f:debug inline="1" title="Tag use using the string from child: {t:format.join(array:'{0:\'<s:format.\', 1:\'regexp \', 2:\' match=\"/foo/\" replace=\"bar\">foo-bar</s:format\', 3:\'.regexp>\'}', separator:'')}"><t:format.regexp match="/foo/" replace="bar">foo-bar</t:format.regexp></f:debug>
+			<f:debug inline="1" title="Inline use checking for a match: {t:format.join(array:'{0:\'{s:format.\', 1:\'regexp(string:\"foo-bar\"\', 2:\', match:\"/foo/\")}\'}', separator:'')}">{t:format.regexp(string:"foo-bar", match:"/foo/")}</f:debug>
 		</p>
 
 
@@ -349,7 +347,7 @@
 			<f:alias map="{testXML:'<a><b><c/></b><b>d</b></a>'}">
 				<f:debug inline="1" title="Variable testXML">{testXML->f:format.raw()}</f:debug>
 				<f:debug inline="1" title="Tag use: {t:format.join(array:'{0:\'<s:format.XML>{test\', 1:\'XML->f:format.raw()}</s:format.XML>\'}', separator:'')}"><t:format.XML>{testXML->f:format.raw()}</t:format.XML></f:debug>
-				<f:debug inline="1" title="Tag use with HTML output: {t:format.join(array:'{0:\'<s:format.xml htmloutput=\"1\">{test\', 1:\'XML->f:format.raw()}</s:format.XML>\'}', separator:'')}"><t:format.XML htmloutput="1">{testXML->f:format.raw()}</t:format.XML></f:debug>
+				<f:debug inline="1" title="Tag use with HTML output: {t:format.join(array:'{0:\'<s:format.XML htmloutput=\"1\">{test\', 1:\'XML->f:format.raw()}</s:format.XML>\'}', separator:'')}"><t:format.XML htmloutput="1">{testXML->f:format.raw()}</t:format.XML></f:debug>
 			</f:alias>
 		</p>
 		<p>

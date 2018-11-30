@@ -1,22 +1,25 @@
-# »find« extension configuration for the Edfu index.
+# »find« extension configuration for demonstration purposes.
 #
-# 2013 Sven-S. Porst, SUB Göttingen <porst@sub.uni-goettingen.de>
+# 2013-2018 Sven-S. Porst <ssp-web@earthlingsoft.net>
 #
 plugin.tx_find {
 	# Paths for own templates and partials.
-	# Most of them use symlinks to point back to the standard files provided by the extension.
+	# The built-in templates and partials are configured at
+	# position 10. Files in the Root Path with the highest
+	# position will take precendence, letting you override
+	# the defaults provided by the extension.
 	view {
-		templateRootPath = EXT:find/Projects/test/Templates/
-		partialRootPath = EXT:find/Projects/test/Partials/
+		templateRootPaths.20 = typo3conf/typo3-find-test/Templates/
+		partialRootPaths.20 = typo3conf/typo3-find-test/Partials/
 	}
 
 	settings {
 		# Connection setup for the Solr index.
 		# Needs to be adapted / overwritten for the final configuration.
-		connection {
+		connections.default.options {
 			host = 127.0.0.1
-			port = 8080
-			path = /solr/edfu
+			port = 8983
+			path = /solr/hos
 			timeout = 10
 		}
 
@@ -122,3 +125,6 @@ plugin.tx_find {
 		}
 	}
 }
+
+
+config.contentObjectExceptionHandler = 0
